@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圣诞快乐</title>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	/*top*/
+	.top{
+		width: 100%;
+		height: 40px;
+		border-bottom: 3px solid pink;
+		margin-bottom: 10px;
+	}
+	.top ul li{
+		float: left;
+		list-style: none;
+		padding: 0 170px;
+		font-family: "微软雅黑";
+		font-size: 20px;
+		color: red;
+		line-height: 40px;
+		cursor: pointer;
+		position: relative;
+
+	}
+	.top ul li:hover{
+		text-shadow: brown 3px 3px 3px;
+	}
+	.top ul li::before{
+		content: "";
+		width: 25px;
+		height: 25px;
+		border-radius: 12.5px;
+		position: absolute;
+		top:5px;
+		left: 140px;
+		background-size:cover; 
+	}
+	li:nth-child(1)::before{
+		background-image: url('./images/2.jpg');
+	}
+	li:nth-child(2)::before{
+		background-image: url('./images/6.jpg');
+	}
+	li:nth-child(3)::before{
+		background-image: url('./images/5.jpg');
+	}
+	/*body*/
+	.happy{
+
+		width: 1024px;
+		height: 550px;	
+		margin: 0 auto;
+		background: url('./images/8.jpg');
+	}
+	/*canvas*/
+	.containerCanvas{
+		width: 1024px;
+		margin: 10px auto;
+	}
+	canvas{
+		/*border: 1px solid #000;*/
+		float: left;
+	}
+	.containerCanvas .say{
+		width: 622px;
+		height: 600px;
+		float: left;	
+		background: url("./images/say.jpg");
+		background-size:cover; 
+		position: relative;
+	}
+	.containerCanvas .say p{
+		font-family: "楷体";
+		line-height: 80px;
+		color: red;
+		text-shadow: brown 3px 3px 3px;
+	}
+	.containerCanvas .say p:nth-child(1){
+		position: absolute;
+		top:70px;
+		left: 40px;
+		font-size: 50px;
+
+	}
+	.containerCanvas .say p:nth-child(2){
+		position: absolute;
+		top:160px;
+		left: 40px;
+		font-size: 45px;
+		font-style: italic;
+	}
+	.containerCanvas .tree{
+		width: 396px;
+		height: 600px;
+		float: right;
+		background-image:url('./images/10.jpg'); 
+		background-size:cover; 
+	}
+</style>
+<body>
+	<!-- top -->
+	<div class="top">
+		<ul>
+			<li>happy</li>
+			<li>Christmas-tree</li>
+			<li>wish</li>
+		</ul>
+	</div>
+	<!-- body -->
+	<div class="happy"></div>
+	<!-- canvas -->
+	<div class="containerCanvas">
+		<canvas id="canvas" width="624" height="68">lonh</canvas>
+		<div class="say">
+			<p>亲爱的媳妇 :</p>
+			<p>Hope all your Christmas dreams come true!</p>
+		</div>
+		<div class="tree"></div>
+	</div>
+	
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var img1 = new Image();
+		img1.src = "./images/14.png";
+		var img2 = new Image();
+		img2.src ="./images/stop.jpg";
+		var n=0;
+		img1.onload=function(){
+			// ctx.scale(0.2,0.2);  
+			var picWidth = img1.width;
+			var picHeight =img1.height;
+			var startX = 0;
+			var startY = 0;
+			var timer=null;
+			var timer1=null;
+			
+			ctx.drawImage(img1, 0, 0, picWidth, picHeight, startX, startY, picWidth, picHeight); 
+			timer = setInterval(function () {
+				ctx.clearRect(startX, startY, picWidth, picHeight);
+				if(startX>canvas.width*4){
+					clearInterval(timer);
+				}
+				ctx.beginPath();
+				startX = startX +10;
+				ctx.drawImage(img1, 0, 0, picWidth, picHeight, startX, startY, picWidth, picHeight);
+			},100);
+		}
+		img2.onload=function(){
+			ctx.beginPath();
+			var picWidth = img2.width;
+			var picHeight =img2.height;
+			var startX = canvas.width-picWidth;
+			var startY = 0;
+			var timer1=null;
+			timer1 =setTimeout(function(){
+				ctx.drawImage(img2, 0, 0, picWidth, picHeight, startX, startY, picWidth, picHeight);
+				ctx.font="50px Microsoft Yahei";
+				ctx.fillStyle="red";
+				ctx.fillText("圣 诞 快 乐",100,50);
+				clearTimeout(timer1);
+			},6500)
+		}
+
+// timer1 =setTimeout(function(){
+
+// 				clearTimeout(timer1);
+// 			},6500
+
+</script>
+</body>
+</html>
